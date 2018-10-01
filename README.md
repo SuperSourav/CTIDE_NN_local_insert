@@ -1,5 +1,5 @@
 # Creating the DB file with the local CTIDE neural network
-
+```bash
 cd /eos/user/s/sosen/LOCALTESTATHENA/localNN
 
 #copy a legit conditional db (COOL db) trained CTIDE NN
@@ -143,3 +143,4 @@ GUID is 5B2B52B4-8392-4B79-99C2-337C8E2CC51D
 >== To folder: /PIXEL/PixelClustering/PixelClusNNCalib channel: 1
 >== COOL tag: PixClusNNCalib-XX-YY-ZZ
 >== Store object with IOV [ 0 , 9223372036854775807 ] channel 1 and tag PixClusNNCalib-XX-YY-ZZ
+```
