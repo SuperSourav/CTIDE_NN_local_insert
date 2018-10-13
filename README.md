@@ -1,10 +1,15 @@
 # Creating the DB file with the local CTIDE neural network
 ```bash
+#clone github repo
+$ setupATLAS
+$ lsetup git
+$ git clone https://github.com/SuperSourav/CTIDE_NN_local_insert.git
+$ cd CTIDE_NN_local_insert
+
 #copy a legit conditional db (COOL db) trained CTIDE NN
 $ cp /afs/cern.ch/atlas/conditions/poolcond/vol0/cond09_mc.000087.gen.COND/cond09_mc.000087.gen.COND._0004.pool.root .
 
-#initializing github repo
-$ setupATLAS
+
 
 #get and run the copier.py script to create dummy local CTIDE NN from cond db CTIDE NN by just removing (not copying) the db id
 $ python copier.py
