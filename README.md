@@ -38,8 +38,7 @@ TFile**        newNN.root
 
 #adding a GUID (cond db id) to the dummy CTIDE NN (GUID as a 'ROOT.TObjString')
 $ coolHist_setFileIdentifier.sh newNN.root
-Generated GUID is 5B2B52B4-8392-4B79-99C2-337C8E2CC51D
-Warning in <TInterpreter::ReadRootmapFile>: class  UCharDbArray found in libRootCnvDict.so  is already in libStorageSvcDict.so 
+Generated GUID is EDCF6180-FE40-4E4F-A6F7-3D191C8D1BDA
    ------------------------------------------------------------
   | Welcome to ROOT 6.08/06                http://root.cern.ch |
   |                               (c) 1995-2016, The ROOT Team |
@@ -49,21 +48,21 @@ Warning in <TInterpreter::ReadRootmapFile>: class  UCharDbArray found in libRoot
    ------------------------------------------------------------
 
 root [0] 
-Processing /tmp/coolHist_setFileIdentifier_4598.C("newNN.root","5B2B52B4-8392-4B79-99C2-337C8E2CC51D")...
-Record GUID 5B2B52B4-8392-4B79-99C2-337C8E2CC51D in file newNN.root
-TFile**        newNN.root    
- TFile*        newNN.root    
-  KEY: TDirectoryFile    NumberParticles;1    NumberParticles
-  KEY: TDirectoryFile    ImpactPoints1P;1    ImpactPoints1P
-  KEY: TDirectoryFile    ImpactPoints2P;1    ImpactPoints2P
-  KEY: TDirectoryFile    ImpactPoints3P;1    ImpactPoints3P
-  KEY: TDirectoryFile    ImpactPointErrorsX1;1    ImpactPointErrorsX1
-  KEY: TDirectoryFile    ImpactPointErrorsX2;1    ImpactPointErrorsX2
-  KEY: TDirectoryFile    ImpactPointErrorsX3;1    ImpactPointErrorsX3
-  KEY: TDirectoryFile    ImpactPointErrorsY1;1    ImpactPointErrorsY1
-  KEY: TDirectoryFile    ImpactPointErrorsY2;1    ImpactPointErrorsY2
-  KEY: TDirectoryFile    ImpactPointErrorsY3;1    ImpactPointErrorsY3
-  KEY: TObjString    fileGUID;1    object title
+Processing /tmp/coolHist_setFileIdentifier_30026.C("newNN.root","EDCF6180-FE40-4E4F-A6F7-3D191C8D1BDA")...
+Record GUID EDCF6180-FE40-4E4F-A6F7-3D191C8D1BDA in file newNN.root
+TFile**		newNN.root	
+ TFile*		newNN.root	
+  KEY: TDirectoryFile	NumberParticles;1	NumberParticles
+  KEY: TDirectoryFile	ImpactPoints1P;1	ImpactPoints1P
+  KEY: TDirectoryFile	ImpactPoints2P;1	ImpactPoints2P
+  KEY: TDirectoryFile	ImpactPoints3P;1	ImpactPoints3P
+  KEY: TDirectoryFile	ImpactPointErrorsX1;1	ImpactPointErrorsX1
+  KEY: TDirectoryFile	ImpactPointErrorsX2;1	ImpactPointErrorsX2
+  KEY: TDirectoryFile	ImpactPointErrorsX3;1	ImpactPointErrorsX3
+  KEY: TDirectoryFile	ImpactPointErrorsY1;1	ImpactPointErrorsY1
+  KEY: TDirectoryFile	ImpactPointErrorsY2;1	ImpactPointErrorsY2
+  KEY: TDirectoryFile	ImpactPointErrorsY3;1	ImpactPointErrorsY3
+  KEY: TObjString	fileGUID;1	object title
 
 #make a local copy of the POOL catalog
 $ cp /cvmfs/atlas-condb.cern.ch/repo/conditions/poolcond/PoolFileCatalog.xml .
@@ -91,29 +90,20 @@ $ export ATLAS_POOLCOND_PATH=$PWD
 $ echo $ATLAS_POOLCOND_PATH
 /eos/user/s/sosen/LOCALTESTATHENA/localNN
 
-#create new local conditions DB (use AtlCoolCopy instead of AtlCoolCopy.exe (obsolete))
+#create new local conditions DB (use AtlCoolCopy instead of AtlCoolCopy.exe (obsolete)) (arbit choice of tag)
 $ AtlCoolCopy "COOLOFL_PIXEL/OFLP200" "sqlite://X;schema=newpixelNNdb.db;dbname=OFLP200" -f /PIXEL/PixelClustering/PixelClusNNCalib -nd -rdo -c
-Using machine hostname lxplus062.cern.ch for DB replica resolution
+Using machine hostname lxplus065.cern.ch for DB replica resolution
 Frontier server at (serverurl=http://atlasfrontier-local.cern.ch:8000/atlr)(serverurl=http://atlasfrontier-ai.cern.ch:8000/atlr)(serverurl=http://lcgft-atlas.gridpp.rl.ac.uk:3128/frontierATLAS)(serverurl=http://ccfrontier.in2p3.fr:23128/ccin2p3-AtlasFrontier)(proxyurl=http://ca-proxy.cern.ch:3128)(proxyurl=http://ca-proxy-meyrin.cern.ch:3128)(proxyurl=http://ca-proxy-wigner.cern.ch:3128)(proxyurl=http://atlasbpfrontier.cern.ch:3127)(proxyurl=http://atlasbpfrontier.fnal.gov:3127) will be considered
-Total of 10 servers found for host lxplus062.cern.ch
+Total of 10 servers found for host lxplus065.cern.ch
 Open source database: COOLOFL_PIXEL/OFLP200
 Allowed replica to try (priority -700) : frontier://ATLF/()/ATLAS_COOLOFL_PIXEL
 Allowed replica to try (priority -699) : oracle://ATLAS_COOLPROD/ATLAS_COOLOFL_PIXEL
 Allowed replica to try (priority -200) : frontier://ATLF/()/ATLAS_COOLOFL_PIXEL
 Open destination database: sqlite://X;schema=newpixelNNdb.db;dbname=OFLP200
-COOL exception caught: The database does not exist
-Try to create new conditions DB
-Creation succeeded
 Add folders in path:/PIXEL/PixelClustering/PixelClusNNCalib [ /PIXEL/PixelClustering/PixelClusNNCalib ]
-Creating folder /PIXEL/PixelClustering/PixelClusNNCalib payload-type 0 on destination
-Created 1 new channels for /PIXEL/PixelClustering/PixelClusNNCalib
-
-# Write data on local conditional db
-$ coolHist_setReference.py 'sqlite://X;schema=newpixelNNdb.db;dbname=OFLP200' /PIXEL/PixelClustering/PixelClusNNCalib 1 PixClusNNCalib-XX-YY-ZZ newNN.root 
-Warning in <TInterpreter::ReadRootmapFile>: class  UCharDbArray found in libRootCnvDict.so  is already in libStorageSvcDict.so 
+[sosen@lxplus065 localNN]$ coolHist_setReference.py 'sqlite://X;schema=newpixelNNdb.db;dbname=OFLP200' /PIXEL/PixelClustering/PixelClusNNCalib 1 PixClusNNCalib-SuperSourav newNN.root
 >== Data valid for run,LB [ 0 , 0 ] to [ 2147483647 , 4294967294 ]
 >== Inserting reference to file: newNN.root  - find GUID
-Warning in <TInterpreter::ReadRootmapFile>: class  UCharDbArray found in libRootCnvDict.so  is already in libStorageSvcDict.so 
    ------------------------------------------------------------
   | Welcome to ROOT 6.08/06                http://root.cern.ch |
   |                               (c) 1995-2016, The ROOT Team |
@@ -123,12 +113,12 @@ Warning in <TInterpreter::ReadRootmapFile>: class  UCharDbArray found in libRoot
    ------------------------------------------------------------
 
 root [0] 
-Processing /tmp/coolHist_extractFileIdentifier_26165.C("newNN.root")...
+Processing /tmp/coolHist_extractFileIdentifier_10369.C("newNN.root")...
 Get GUID from file newNN.root
-GUID is 5B2B52B4-8392-4B79-99C2-337C8E2CC51D
+GUID is EDCF6180-FE40-4E4F-A6F7-3D191C8D1BDA
 
 >== Write data on COOL connection: sqlite://X;schema=newpixelNNdb.db;dbname=OFLP200
 >== To folder: /PIXEL/PixelClustering/PixelClusNNCalib channel: 1
->== COOL tag: PixClusNNCalib-XX-YY-ZZ
->== Store object with IOV [ 0 , 9223372036854775807 ] channel 1 and tag PixClusNNCalib-XX-YY-ZZ
+>== COOL tag: PixClusNNCalib-SuperSourav
+>== Store object with IOV [ 0 , 9223372036854775807 ] channel 1 and tag PixClusNNCalib-SuperSourav
 ```
