@@ -1,30 +1,20 @@
 # Creating the DB file with the local CTIDE neural network
 ```bash
-cd /eos/user/s/sosen/LOCALTESTATHENA/localNN
-
 #copy a legit conditional db (COOL db) trained CTIDE NN
-cp /afs/cern.ch/atlas/conditions/poolcond/vol0/cond09_mc.000087.gen.COND/cond09_mc.000087.gen.COND._0004.pool.root .
+$ cp /afs/cern.ch/atlas/conditions/poolcond/vol0/cond09_mc.000087.gen.COND/cond09_mc.000087.gen.COND._0004.pool.root .
 
 #initializing github repo
-setupATLAS
-lsetup git
-git init
-echo "# Creating the DB file with the local CTIDE neural network" >> README.md
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/SuperSourav/CTIDE_NN_local_insert.git
-git push -u origin master
+$ setupATLAS
 
-cp ../newNetwork/copier.py .
 #get and run the copier.py script to create dummy local CTIDE NN from cond db CTIDE NN by just removing (not copying) the db id
-python copier.py
+$ python copier.py
 #get and run the completenetwork.py script to insert a standalone numNN and fill the rest with dummy local CTIDE NN from cond db CTIDE NN by just removing (not copying) the db id
-python completenetwork.py
+$ python completenetwork.py
 
 
 #check if the local CTIDE NN has the correct branches
-asetup Athena, 21.0.34
-python
+$ asetup Athena, 21.0.82 #or latest
+$ python
 Python 2.7.13 (default, Apr 22 2017, 20:06:00) 
 [GCC 6.2.0] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
@@ -46,13 +36,8 @@ TFile**        newNN.root
   KEY: TDirectoryFile    ImpactPointErrorsY3;1    ImpactPointErrorsY3
 >>> 
 
-# add the copier script to git
-git add copier.py
-git commit -m "script to copy CTIDE NN branch minus the GUID to create dummy local CTIDE NN"
-git push -u origin master
-
 #adding a GUID (cond db id) to the dummy CTIDE NN (GUID as a 'ROOT.TObjString')
-coolHist_setFileIdentifier.sh newNN.root
+$ coolHist_setFileIdentifier.sh newNN.root
 Generated GUID is 5B2B52B4-8392-4B79-99C2-337C8E2CC51D
 Warning in <TInterpreter::ReadRootmapFile>: class  UCharDbArray found in libRootCnvDict.so  is already in libStorageSvcDict.so 
    ------------------------------------------------------------
@@ -81,29 +66,29 @@ TFile**        newNN.root
   KEY: TObjString    fileGUID;1    object title
 
 #make a local copy of the POOL catalog
-cp /cvmfs/atlas-condb.cern.ch/repo/conditions/poolcond/PoolFileCatalog.xml .
+$ cp /cvmfs/atlas-condb.cern.ch/repo/conditions/poolcond/PoolFileCatalog.xml .
 
 #the original CTIDE NN file is in the POOL catalog (just sanity check that this is a correct POOL catalog)
-grep cond09_mc.000087.gen.COND._0004.pool.root PoolFileCatalog.xml
+$ grep cond09_mc.000087.gen.COND._0004.pool.root PoolFileCatalog.xml
     <pfn filetype="ROOT_All" name="/cvmfs/atlas-condb.cern.ch/repo/conditions/cond09/cond09_mc.000087.gen.COND/cond09_mc.000087.gen.COND._0004.pool.root"/>
     <lfn name="cond09_mc.000087.gen.COND._0004.pool.root"/>
 
 
 # Insert the file into the POOL catalogue
-coolHist_insertFileToCatalog.py newNN.root
+$ coolHist_insertFileToCatalog.py newNN.root
 #check if inserted
-grep newNN.root PoolFileCatalog.xml
+$ grep newNN.root PoolFileCatalog.xml
       <pfn filetype="ROOT_All" name="newNN.root"/>
 #physical file name (pfn) added to the catalog, but logical file name (lfn) not there yet! moving on
 
 #PATH VARIABLE set to CERN POOL data by Athena from where the POOL catalog was copied here
-echo $ATLAS_POOLCOND_PATH
+$ echo $ATLAS_POOLCOND_PATH
 /cvmfs/atlas-condb.cern.ch/repo/conditions
 
 #Now as we are going to work with a local POOL catalog, reset the PATH VARIABLE set to CERN POOL data to the $PWD
-export ATLAS_POOLCOND_PATH=$PWD
+$ export ATLAS_POOLCOND_PATH=$PWD
 #check if the path set correctly
-echo $ATLAS_POOLCOND_PATH
+$ echo $ATLAS_POOLCOND_PATH
 /eos/user/s/sosen/LOCALTESTATHENA/localNN
 
 #create new local conditions DB (use AtlCoolCopy instead of AtlCoolCopy.exe (obsolete))
