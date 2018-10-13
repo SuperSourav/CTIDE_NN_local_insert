@@ -90,7 +90,7 @@ $ export ATLAS_POOLCOND_PATH=$PWD
 $ echo $ATLAS_POOLCOND_PATH
 /eos/user/s/sosen/LOCALTESTATHENA/localNN
 
-#create new local conditions DB (use AtlCoolCopy instead of AtlCoolCopy.exe (obsolete)) (arbit choice of tag)
+#create new local conditions DB (use AtlCoolCopy instead of AtlCoolCopy.exe (obsolete)) 
 $ AtlCoolCopy "COOLOFL_PIXEL/OFLP200" "sqlite://X;schema=newpixelNNdb.db;dbname=OFLP200" -f /PIXEL/PixelClustering/PixelClusNNCalib -nd -rdo -c
 Using machine hostname lxplus065.cern.ch for DB replica resolution
 Frontier server at (serverurl=http://atlasfrontier-local.cern.ch:8000/atlr)(serverurl=http://atlasfrontier-ai.cern.ch:8000/atlr)(serverurl=http://lcgft-atlas.gridpp.rl.ac.uk:3128/frontierATLAS)(serverurl=http://ccfrontier.in2p3.fr:23128/ccin2p3-AtlasFrontier)(proxyurl=http://ca-proxy.cern.ch:3128)(proxyurl=http://ca-proxy-meyrin.cern.ch:3128)(proxyurl=http://ca-proxy-wigner.cern.ch:3128)(proxyurl=http://atlasbpfrontier.cern.ch:3127)(proxyurl=http://atlasbpfrontier.fnal.gov:3127) will be considered
@@ -101,7 +101,9 @@ Allowed replica to try (priority -699) : oracle://ATLAS_COOLPROD/ATLAS_COOLOFL_P
 Allowed replica to try (priority -200) : frontier://ATLF/()/ATLAS_COOLOFL_PIXEL
 Open destination database: sqlite://X;schema=newpixelNNdb.db;dbname=OFLP200
 Add folders in path:/PIXEL/PixelClustering/PixelClusNNCalib [ /PIXEL/PixelClustering/PixelClusNNCalib ]
-[sosen@lxplus065 localNN]$ coolHist_setReference.py 'sqlite://X;schema=newpixelNNdb.db;dbname=OFLP200' /PIXEL/PixelClustering/PixelClusNNCalib 1 PixClusNNCalib-SuperSourav newNN.root
+
+# arbit choice of tag
+$ coolHist_setReference.py 'sqlite://X;schema=newpixelNNdb.db;dbname=OFLP200' /PIXEL/PixelClustering/PixelClusNNCalib 1 PixClusNNCalib-SuperSourav newNN.root
 >== Data valid for run,LB [ 0 , 0 ] to [ 2147483647 , 4294967294 ]
 >== Inserting reference to file: newNN.root  - find GUID
    ------------------------------------------------------------
