@@ -18,9 +18,10 @@ while (key.GetTitle() != "object title"):
     continue
 
   if (dirname == "NumberParticles"):
+    numNNdir = "/afs/cern.ch/work/s/sosen/public/Qualification_Task/ZONE/CTIDE_NN_framework/neuralNets/8bitTOT/"
     fwtname = "8bitTOT"
-    print "fetching numNN from standalone CTIDENN %s"%fwtname
-    h52root.numNN(fout, fwtname)
+    print "fetching numNN from standalone CTIDENN %s"%(numNNdir+fwtname)
+    h52root.numNN(fout, numNNdir+fwtname)
     key = nextkey()
     continue
 

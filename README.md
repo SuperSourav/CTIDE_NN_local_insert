@@ -15,9 +15,12 @@ git commit -m "first commit"
 git remote add origin https://github.com/SuperSourav/CTIDE_NN_local_insert.git
 git push -u origin master
 
-#get and run the copier.py script to create dummy local CTIDE NN from cond db CTIDE NN by just removing (not copying) the db id
 cp ../newNetwork/copier.py .
+#get and run the copier.py script to create dummy local CTIDE NN from cond db CTIDE NN by just removing (not copying) the db id
 python copier.py
+#get and run the completenetwork.py script to insert a standalone numNN and fill the rest with dummy local CTIDE NN from cond db CTIDE NN by just removing (not copying) the db id
+python completenetwork.py
+
 
 #check if the local CTIDE NN has the correct branches
 asetup Athena, 21.0.34
